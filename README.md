@@ -4,7 +4,7 @@
 
 To develop an LSTM-based model for recognizing the named entities in the text.
 
-## Problem Statement and Dataset
+## Problem Statement
 * We aim to develop an LSTM-based neural network model using Bidirectional Recurrent Neural Networks for recognizing the named entities in the text.
 * The dataset used has a number of sentences, and each words have their tags.
 * We have to vectorize these words using Embedding techniques to train our model.
@@ -36,8 +36,7 @@ To develop an LSTM-based model for recognizing the named entities in the text.
 ## PROGRAM:
 
 ### Libraries:
-```
-python
+```python
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -48,8 +47,7 @@ from keras.models import Model
 ```
 
 ### Reading, Pre-processing Data:
-```
-python
+```python
 data = pd.read_csv("ner_dataset.csv", encoding="latin1")
 data.head(50)
 data = data.fillna(method="ffill")
@@ -69,8 +67,7 @@ num_words
 num_tags
 ```
 ### Defining a Class to get sentence:
-```
-python
+```python
 class SentenceGetter(object):
     def __init__(self, data):
         self.n_sent = 1
@@ -109,14 +106,7 @@ max_len = 50
 ```
 
 ### Padding:
-```
-python
-nums = [[1], [2, 3], [4, 5, 6]]
-sequence.pad_sequences(nums)
-
-nums = [[1], [2, 3], [4, 5, 6]]
-sequence.pad_sequences(nums,maxlen=2)
-
+```python
 X = sequence.pad_sequences(maxlen=max_len,
                   sequences=X1, padding="post",
                   value=num_words-1)
@@ -133,8 +123,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
 ```
 
 ### LSTM Model:
-```
-python
+```python
 input_word = layers.Input(shape=(max_len,))
 embedding_layer = layers.Embedding(input_dim = num_words,
                                    output_dim = 50,
@@ -186,11 +175,11 @@ for w, true, pred in zip(X_test[i], y_true, p[0]):
 
 ### Training Loss, Validation Loss Vs Iteration Plot:
 
-![image](https://github.com/VaishnaviMariappan/named-entity-recognition/assets/94169913/6db0b999-5b1c-4f70-80f5-93246aa9a396)
+![image](https://github.com/Aashima02/named-entity-recognition/assets/93427086/f3b93925-9723-4d4c-b94a-75a13d4829e5)
 
 ### Accuracy, Validation Accuracy Vs Iteration Plot:
 
-![image](https://github.com/VaishnaviMariappan/named-entity-recognition/assets/94169913/77a371f6-442a-4692-9619-03dd228368e0)
+![image](https://github.com/Aashima02/named-entity-recognition/assets/93427086/ffe712a3-66a7-44c1-b176-111cd8d8c7c6)
 
 
 ### Sample Text Prediction
